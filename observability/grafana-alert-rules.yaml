@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: model-service-alerts
+spec:
+  groups:
+  - name: model-service.rules
+    rules:
+    - alert: HighErrorRate
+      expr: rate(http_requests_total{status=~"5.."}[1m]) > 0.05
+      for: 1m
+      labels:
+        severity: critical
+      annotations:
+        summary: "High error rate detected on model-service"
+        description: "More than 5% of requests are failing with 5xx errors"

@@ -1,0 +1,23 @@
+prometheus:
+  enabled: true
+
+grafana:
+  enabled: true
+  service:
+    type: LoadBalancer
+  sidecar:
+    dashboards:
+      enabled: true
+    datasources:
+      enabled: true
+
+fluentd:
+  enabled: true
+  configMap: fluentd-config
+
+elasticsearch:
+  enabled: true
+  replicas: 1
+
+kibana:
+  enabled: true
